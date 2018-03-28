@@ -43,6 +43,6 @@ A C++ implementation of PixMix inpainting.
 |![venice_wall](./data/venice_wall.png)|![venice_wall_mask](./data/venice_wall_mask.png)|![venice_wall_res](./data/venice_wall_res.png)
 
 
-
 # Tested Environment List
 * Win 10 64bit + VS2015 + OpenCV 3.3.1
+* maxOS 10.13.3 + OpenCV3.3.1

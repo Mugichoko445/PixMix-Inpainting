@@ -4,9 +4,9 @@
 //#define MAGENTA_MASK_MODE
 
 #ifndef MAGENTA_MASK_MODE
-const std::string pathToSrcColor("./data/birds.png");
-const std::string pathToDstColor("./data/birds_res.png");
-const std::string pathToMask("./data/birds_mask.png");
+const std::string pathToSrcColor("../data/birds.png");
+const std::string pathToDstColor("../data/birds_res.png");
+const std::string pathToMask("../data/birds_mask.png");
 
 int main()
 {
@@ -31,8 +31,8 @@ int main()
 }
 
 #else
-const std::string pathToSrcColor("./data/birds_magenta.png");
-const std::string pathToDstColor("./data/birds_magenta_res.png");
+const std::string pathToSrcColor("../data/birds_magenta.png");
+const std::string pathToDstColor("../data/birds_magenta_res.png");
 
 int main()
 {

@@ -5,7 +5,8 @@ PixMix::~PixMix() { }
 
 void PixMix::init(
 	const cv::Mat_<cv::Vec3b> &color,
-	const cv::Mat_<uchar> &mask
+	const cv::Mat_<uchar> &mask,
+	const int blurSize
 )
 {
 	assert(color.size() == mask.size());
@@ -36,7 +37,7 @@ void PixMix::init(
 
 	// for the final composite
 	mColor = color.clone();
-	cv::blur(mask, mAlpha, cv::Size(3, 3));
+	cv::blur(mask, mAlpha, cv::Size(blurSize, blurSize));
 }
 
 void PixMix::execute(
@@ -44,17 +45,9 @@ void PixMix::execute(
 	const float alpha
 )
 {
-	// todo: I'm not sure if this numbers are reasonable
-	static const std::vector<int>itrNum = {
-		6, 10, 10, 20, 20, 10, 10, 10
-	};
-	static const std::vector<int> itrNumOfRandSearch = {
-		15, 15, 15, 15, 15, 15, 15, 15
-	};
-
 	for (int lv = int(pm.size()) - 1; lv >= 0; --lv)
 	{
-		pm[lv].execute(alpha, itrNum[lv], itrNumOfRandSearch[lv], 0.5f);
+		pm[lv].execute(alpha, 2, 1, 0.5f);
 		if (lv > 0) fillInLowerLv(pm[lv], pm[lv - 1]);
 	}
 

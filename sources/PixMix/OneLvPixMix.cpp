@@ -145,7 +145,7 @@ void OneLvPixMix::fwdUpdate(
 	const int maxRandSearchItr
 )
 {
-#pragma omp parallel for
+#pragma omp parallel for // NOTE: This is not thread-safe
 	for (int r = 0; r < mColor[WO_BORDER].rows; ++r)
 	{
 		uchar *ptrMask = mMask[WO_BORDER].ptr<uchar>(r);
@@ -211,7 +211,7 @@ void OneLvPixMix::bwdUpdate(
 	const int maxRandSearchItr
 )
 {
-#pragma omp parallel for
+#pragma omp parallel for // NOTE: This is not thread-safe
 	for (int r = mColor[WO_BORDER].rows - 1; r >= 0; --r)
 	{
 		uchar *ptrMask = mMask[WO_BORDER].ptr<uchar>(r);

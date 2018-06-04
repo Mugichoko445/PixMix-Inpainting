@@ -12,6 +12,7 @@ public:
 	~OneLvPixMix();
 
 	void init(const cv::Mat_<cv::Vec3b> &color, const cv::Mat_<uchar> &mask);
+	// NOTE: Increasing "maxItr" and "maxRandSearchItr" will improve the quality of results but will decrease the speed as well
 	void execute(const float scAlpha, const int maxItr, const int maxRandSearchItr, const float threshDist);
 
 	cv::Mat_<cv::Vec3b> *getColorPtr();

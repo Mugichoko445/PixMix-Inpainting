@@ -1,47 +1,19 @@
 #include "Utilities.h"
 
-void Util::createVizPosMap(
-	const cv::Mat_<cv::Vec2i> &srcPosMap,
-	cv::Mat_<cv::Vec3b> &dstColorMap
-)
+namespace util
 {
-	dstColorMap = cv::Mat_<cv::Vec3b>(srcPosMap.size());
-
-	for (int r = 0; r < srcPosMap.rows; ++r)
+	void CreateVizPosMap(const cv::InputArray srcPosMap, cv::OutputArray dstColorMap)
 	{
-		for (int c = 0; c < srcPosMap.cols; ++c)
+		auto src = cv::Mat2i(srcPosMap.getMat());
+		auto dst = cv::Mat3b(srcPosMap.size());
+
+		for (int r = 0; r < src.rows; ++r) for (int c = 0; c < src.cols; ++c)
 		{
-			dstColorMap(r, c)[0] = int((float)srcPosMap(r, c)[1] / (float)srcPosMap.cols * 255.0f);
-			dstColorMap(r, c)[1] = int((float)srcPosMap(r, c)[0] / (float)srcPosMap.rows * 255.0f);
-			dstColorMap(r, c)[2] = 255;
+			dst(r, c)[0] = int((float)src(r, c)[1] / (float)src.cols * 255.0f);
+			dst(r, c)[1] = int((float)src(r, c)[0] / (float)src.rows * 255.0f);
+			dst(r, c)[2] = 255;
 		}
+
+		dst.copyTo(dstColorMap);
 	}
 }
-
-void Util::createMask(
-	const cv::Mat_<cv::Vec3b> &srcColor,
-	const cv::Scalar &maskColor,
-	cv::Mat_<uchar> &dstMask,
-	const int maskVal,
-	const int nonMaskVal
-)
-{
-	dstMask = cv::Mat_<uchar>(srcColor.size());
-
-	for (int r = 0; r < srcColor.rows; ++r)
-	{
-		for (int c = 0; c < srcColor.cols; ++c)
-		{
-			cv::Vec3b color = srcColor(r, c);
-
-			if (color[0] == maskColor[0] && color[1] == maskColor[1] && color[2] == maskColor[2])
-			{
-				dstMask(r, c) = maskVal;
-			}
-			else
-			{
-				dstMask(r, c) = nonMaskVal;
-			}
-		}
-	}
-};

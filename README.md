@@ -1,6 +1,6 @@
 A C++ implementation of PixMix inpainting.
 
-[Jan Herling and Wolfgang Broll, "High-Quality Real-Time Video Inpaintingwith PixMix," Vol. 20, Issue 6, pp. 866 - 879, 2014.](http://ieeexplore.ieee.org/document/6714519/)
+[Jan Herling and Wolfgang Broll, "High-Quality Real-Time Video Inpaintingwith PixMix," IEEE TVCG, Vol. 20, Issue 6, pp. 866 - 879, 2014.](http://ieeexplore.ieee.org/document/6714519/)
 
 # Features
 * Inpainting only
@@ -17,11 +17,8 @@ A C++ implementation of PixMix inpainting.
 
 # Usage
 * Inputs
-	* MAGENTA_MASK_MODE
-		* 3ch color image with magenta color mask
-	* The other
-		* 3ch color image
-		* 1ch black and white mask image
+	* 3ch color image
+	* 1ch black and white mask image
 * Output
 	* 3ch inpainted image
 
@@ -44,5 +41,6 @@ A C++ implementation of PixMix inpainting.
 
 
 # Tested Environment List
+* Win 10 64bit + VS2019 + OpenCV 4.5.1
 * Win 10 64bit + VS2015 + OpenCV 3.3.1
 * maxOS 10.13.3 + OpenCV3.3.1

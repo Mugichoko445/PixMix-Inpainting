@@ -3,21 +3,26 @@
 #include <vector>
 #include "OneLvPixMix.h"
 
-class PixMix
+namespace dr
 {
-public:
-	PixMix();
-	~PixMix();
+	using namespace det;
 
-	void init(const cv::Mat_<cv::Vec3b> &color, const cv::Mat_<uchar> &mask, const int blurSize = 5);
-	void execute(cv::Mat_<cv::Vec3b> &dst, const float alpha);
+	class PixMix
+	{
+	public:
+		PixMix();
+		~PixMix();
 
-private:
-	std::vector<OneLvPixMix> pm;
-	cv::Mat_<cv::Vec3b> mColor;
-	cv::Mat_<uchar> mAlpha;
+		void Run(cv::InputArray color, cv::InputArray mask, cv::OutputArray inpainted, const PixMixParams& params, bool debugViz = false);
 
-	int calcPyrmLv(int width, int height);
-	void fillInLowerLv(OneLvPixMix &pmUpper, OneLvPixMix &pmLower);
-	void blendBorder(cv::Mat_<cv::Vec3b> &dst);
-};
+	private:
+		std::vector<OneLvPixMix> pm;
+		cv::Mat3b mColor;
+		cv::Mat1b mAlpha;
+
+		void Init(cv::InputArray color, cv::InputArray mask, const int blurSize);
+		int CalcPyrmLv(int width, int height);
+		void FillInLowerLv(OneLvPixMix& pmUpper, OneLvPixMix& pmLower);
+		void BlendBorder(cv::OutputArray dst);
+	};
+}

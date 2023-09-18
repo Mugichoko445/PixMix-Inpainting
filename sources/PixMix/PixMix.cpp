@@ -118,6 +118,7 @@ namespace dr
 		cv::Mat3f mColorF, mPMColorF, mDstF(pm[0].GetColorPtr()->size());
 		mColor.convertTo(mColorF, CV_32FC3, 1.0 / 255.0);
 		pm[0].GetColorPtr()->convertTo(mPMColorF, CV_32FC3, 1.0 / 255.0);
+		cv::Mat1b* mMask = pm[0].GetMaskPtr();
 
 		cv::Mat1f mAlphaF;
 		mAlpha.convertTo(mAlphaF, CV_32F, 1.0 / 255.0);
@@ -130,7 +131,14 @@ namespace dr
 			auto ptrAlpha = mAlphaF.ptr<float>(r);
 			for (int c = 0; c < mColor.cols; ++c)
 			{
-				ptrDst[c] = ptrAlpha[c] * ptrSrc[c] + (1.0f - ptrAlpha[c]) * ptrPM[c];
+				if(mMask->at<uchar>(r, c) == 255) 
+				{
+					ptrDst[c] = ptrAlpha[c] * ptrSrc[c] + (1.0f - ptrAlpha[c]) * ptrPM[c];
+				}
+				else 
+				{
+					ptrDst[c] = ptrPM[c];
+				}
 			}
 		}
 
